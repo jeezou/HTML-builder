@@ -12,17 +12,17 @@ const rl = readline.createInterface({
 });
 
 const exitProcess = () => {
-  console.log('\nComplete Input');
+  console.log('\nComplete Write Session');
   rl.close();
   writeStream.end();
   process.exit();
 };
 
-rl.on('SIGINT', exitProcess);
+process.on('exit', exitProcess);
 
 const recReadLine = () => {
   rl.question('', (answer) => {
-    if (answer.trim() === 'exit') exitProcess();
+    if (answer.trim() === 'exit') process.exit();
     else {
       writeStream.write(answer);
       recReadLine();
