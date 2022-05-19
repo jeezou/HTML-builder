@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 });
 
 const exitProcess = () => {
-  console.log('\nComplete Write Session');
+  console.log('--------\nComplete Write Session');
   rl.close();
   writeStream.end();
   process.exit();
@@ -24,11 +24,11 @@ const recReadLine = () => {
   rl.question('', (answer) => {
     if (answer.trim() === 'exit') process.exit();
     else {
-      writeStream.write(answer);
+      writeStream.write(answer + '\n');
       recReadLine();
     }
   });
 };
 
-console.log('Hi There! Lets write smthng\n');
+console.log('Hi There! Lets write smthng\n--------');
 recReadLine();
