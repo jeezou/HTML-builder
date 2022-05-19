@@ -11,10 +11,12 @@ fs.mkdir(targetPath, { recursive: true }, (err) => {
     if (err) console.error(err);
     else {
       files.forEach((file) => {
-        fs.promises.copyFile(
-          path.join(dirPath, file.name),
-          path.join(targetPath, file.name)
-        );
+        if (!file.isDirectory()) {
+          fs.promises.copyFile(
+            path.join(dirPath, file.name),
+            path.join(targetPath, file.name)
+          );
+        }
       });
     }
   });
