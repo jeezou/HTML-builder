@@ -11,6 +11,10 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+rl.on('SIGINT', () => {
+  process.emit('SIGINT');
+});
+
 const exitProcess = () => {
   console.log('--------\nComplete Write Session');
   rl.close();
@@ -18,11 +22,11 @@ const exitProcess = () => {
   process.exit();
 };
 
-process.on('exit', exitProcess);
+process.on('SIGINT', exitProcess);
 
 const recReadLine = () => {
   rl.question('', (answer) => {
-    if (answer.trim() === 'exit') process.exit();
+    if (answer.trim() === 'exit') exitProcess();
     else {
       writeStream.write(answer + '\n');
       recReadLine();
